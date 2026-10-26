@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Android Roblox Low Graphics</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;background:#090d18;color:#f1f5f9;
+  font-family:Arial,sans-serif;padding:24px 16px;
+}
+main{max-width:760px;margin:35px auto}
+.hero{
+  text-align:center;padding:35px 20px;
+  background:linear-gradient(135deg,#172554,#111827);
+  border:1px solid #334155;border-radius:20px;
+}
+.tag{color:#67e8f9;font-size:12px;letter-spacing:2px}
+h1{font-size:30px;margin:16px 0}
+p{color:#b8c4d6;line-height:1.7}
+.card{
+  background:#111827;border:1px solid #334155;
+  border-radius:16px;padding:22px;margin-top:20px;
+}
+h2{font-size:19px}
+pre{
+  background:#060910;color:#a5f3fc;padding:16px;
+  border-radius:10px;overflow:auto;white-space:pre-wrap;
+  font-size:13px;line-height:1.6;
+}
+button{
+  width:100%;padding:14px;border:0;border-radius:10px;
+  background:#06b6d4;color:#06111c;font-weight:bold;
+  font-size:15px;cursor:pointer;margin-top:12px;
+}
+.note{font-size:13px}
+footer{text-align:center;color:#64748b;font-size:12px;margin:25px}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="tag">ROBLOX PERFORMANCE TOOL</div>
+    <h1>Android Roblox<br>Low Graphics</h1>
+    <p>Script untuk membantu mengurangi efek visual pada experience Roblox milikmu.</p>
+  </section>
+
+  <section class="card">
+    <h2>⚡ Low Graphics Script</h2>
+    <p>Tekan tombol di bawah untuk menyalin script Lua.</p>
+    <pre id="script">local Lighting = game:GetService("Lighting")
+
+Lighting.GlobalShadows = false
+
+for _, obj in ipairs(game:GetDescendants()) do
+    if obj:IsA("PostEffect") then
+        obj.Enabled = false
+    elseif obj:IsA("ParticleEmitter")
+        or obj:IsA("Trail")
+        or obj:IsA("Beam") then
+        obj.Enabled = false
+    end
+end
+
+print("Low Graphics enabled!")</pre>
+    <button onclick="copyScript()">📋 COPY SCRIPT</button>
+    <p id="status" class="note"></p>
+  </section>
+
+  <section class="card">
+    <h2>📱 Cara menggunakan</h2>
+    <p>1. Salin script di atas.</p>
+    <p>2. Buka Roblox Studio dan proyek milikmu.</p>
+    <p>3. Buat sebuah LocalScript di StarterPlayer → StarterPlayerScripts.</p>
+    <p>4. Tempelkan script, lalu jalankan untuk menguji hasilnya.</p>
+    <p class="note">Catatan: Script ini ditujukan untuk experience yang kamu buat atau punya izin untuk edit. Efek pengurangan grafis dapat berbeda-beda dan tidak menjamin peningkatan FPS.</p>
+  </section>
+  <footer>Made for Roblox creators · Android Low Graphics</footer>
+</main>
+<script>
+function copyScript(){
+  const code=document.getElementById("script").textContent;
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(code).then(()=>{
+      document.getElementById("status").textContent="✅ Script berhasil disalin!";
+    }).catch(()=>fallbackCopy(code));
+  }else{
+    fallbackCopy(code);
+  }
+}
+function fallbackCopy(code){
+  const area=document.createElement("textarea");
+  area.value=code;
+  document.body.appendChild(area);
+  area.select();
+  try{
+    document.execCommand("copy");
+    document.getElementById("status").textContent="✅ Script berhasil disalin!";
+  }catch(e){
+    document.getElementById("status").textContent="Silakan salin script secara manual.";
+  }
+  area.remove();
+}
+</script>
+</body>
+  </html>
+  
